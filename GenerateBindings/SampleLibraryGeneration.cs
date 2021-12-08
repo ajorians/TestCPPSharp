@@ -6,14 +6,14 @@ namespace GenerateBindings
 {
    class SampleLibraryGeneration : ILibrary
    {
-      public void Postprocess( Driver driver, ASTContext ctx )
+      public override void Postprocess( Driver driver, ASTContext ctx )
       {
       }
-      public void Preprocess( Driver driver, ASTContext ctx )
+      public override void Preprocess( Driver driver, ASTContext ctx )
       {
 
       }
-      public void Setup( Driver driver )
+      public override void Setup( Driver driver )
       {
          var options = driver.Options;
          options.GeneratorKind = GeneratorKind.CSharp;
@@ -23,6 +23,7 @@ namespace GenerateBindings
          module.IncludeDirs.Add( @"C:\git\TestCPPSharp\ExistingInterop" );
 
          //TODO: Programmatically grab all headers from this include path
+         module.Headers.Add( "IExampleClass.h" );
          module.Headers.Add( "ExampleClass.h" );
          module.Headers.Add( "NewMaster.h" );
          module.Headers.Add( "Sample.h" );
@@ -35,7 +36,7 @@ namespace GenerateBindings
          //module.ReferencedAssemblies.Add( "ExistingInterop.dll" );
          module.SharedLibraryName = "ExistingInterop.dll";
       }
-      public void SetupPasses( Driver driver )
+      public override void SetupPasses( Driver driver )
       {
 
       }

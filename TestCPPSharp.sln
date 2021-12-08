@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteropDependencies", "Inte
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExistingInterop", "ExistingInterop\ExistingInterop.vcxproj", "{8F8A5A9A-CCBA-4CA6-8CBF-F89F830CEB83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateBindings", "GenerateBindings\GenerateBindings.csproj", "{CBEDEF6F-1820-494B-A04F-EFE21A470595}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenerateBindings", "GenerateBindings\GenerateBindings.csproj", "{CBEDEF6F-1820-494B-A04F-EFE21A470595}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfCoreApplication", "WpfCoreApplication\WpfCoreApplication.csproj", "{8B38D573-9747-4849-9E69-149ECB17A4E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{CBEDEF6F-1820-494B-A04F-EFE21A470595}.Debug|x64.Build.0 = Debug|Any CPU
 		{CBEDEF6F-1820-494B-A04F-EFE21A470595}.Release|x64.ActiveCfg = Release|Any CPU
 		{CBEDEF6F-1820-494B-A04F-EFE21A470595}.Release|x64.Build.0 = Release|Any CPU
+		{8B38D573-9747-4849-9E69-149ECB17A4E7}.Debug|x64.ActiveCfg = Debug|x64
+		{8B38D573-9747-4849-9E69-149ECB17A4E7}.Debug|x64.Build.0 = Debug|x64
+		{8B38D573-9747-4849-9E69-149ECB17A4E7}.Release|x64.ActiveCfg = Release|Any CPU
+		{8B38D573-9747-4849-9E69-149ECB17A4E7}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

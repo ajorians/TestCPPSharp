@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="includes\ExampleClass.h" />
     <ClInclude Include="includes\ExportAPI.h" />
+    <ClInclude Include="includes\IExampleClass.h" />
     <ClInclude Include="includes\Master.h" />
     <ClInclude Include="includes\NewMaster.h" />
   </ItemGroup>

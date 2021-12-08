@@ -12,41 +12,295 @@ using __IntPtr = global::System.IntPtr;
 
 namespace NativeLibrary
 {
-    public unsafe partial class ExampleClass : IDisposable
+    public unsafe abstract partial class IExampleClass : IDisposable
     {
-        [StructLayout(LayoutKind.Sequential, Size = 4)]
+        [StructLayout(LayoutKind.Sequential, Size = 8)]
         public partial struct __Internal
         {
+            internal __IntPtr vfptr_IExampleClass;
+
+            [SuppressUnmanagedCodeSecurity, DllImport("ExistingInterop", EntryPoint = "??0IExampleClass@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
+            internal static extern __IntPtr ctor(__IntPtr __instance);
+
+            [SuppressUnmanagedCodeSecurity, DllImport("ExistingInterop", EntryPoint = "??0IExampleClass@@QEAA@AEBV0@@Z", CallingConvention = __CallingConvention.Cdecl)]
+            internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
+        }
+
+        public __IntPtr __Instance { get; protected set; }
+
+        internal static readonly global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::NativeLibrary.IExampleClass> NativeToManagedMap = new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::NativeLibrary.IExampleClass>();
+
+        protected bool __ownsNativeInstance;
+
+        internal static IExampleClass __CreateInstance(__IntPtr native, bool skipVTables = false)
+        {
+            return new IExampleClassInternal(native.ToPointer(), skipVTables);
+        }
+
+        internal static IExampleClass __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+        {
+            if (native == __IntPtr.Zero)
+                return null;
+            if (NativeToManagedMap.TryGetValue(native, out var managed))
+                return (IExampleClass)managed;
+            var result = __CreateInstance(native, skipVTables);
+            if (saveInstance)
+                NativeToManagedMap[native] = result;
+            return result;
+        }
+
+        internal static IExampleClass __GetInstance(__IntPtr native)
+        {
+            if (!NativeToManagedMap.TryGetValue(native, out var managed))
+                throw new System.Exception("No managed instance was found");
+            var result = (IExampleClass)managed;
+            if (result.__ownsNativeInstance)
+                result.SetupVTables();
+            return result;
+        }
+
+        internal static IExampleClass __CreateInstance(__Internal native, bool skipVTables = false)
+        {
+            return new IExampleClassInternal(native, skipVTables);
+        }
+
+        protected IExampleClass(void* native, bool skipVTables = false)
+        {
+            if (native == null)
+                return;
+            __Instance = new __IntPtr(native);
+            if (!skipVTables)
+                SetupVTables(true);
+        }
+
+        protected IExampleClass()
+        {
+            __Instance = Marshal.AllocHGlobal(sizeof(global::NativeLibrary.IExampleClass.__Internal));
+            __ownsNativeInstance = true;
+            NativeToManagedMap[__Instance] = this;
+            __Internal.ctor(__Instance);
+            SetupVTables(GetType().FullName == "NativeLibrary.IExampleClass");
+        }
+
+        protected IExampleClass(global::NativeLibrary.IExampleClass _0)
+        {
+            __Instance = Marshal.AllocHGlobal(sizeof(global::NativeLibrary.IExampleClass.__Internal));
+            __ownsNativeInstance = true;
+            NativeToManagedMap[__Instance] = this;
+            if (ReferenceEquals(_0, null))
+                throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+            var __arg0 = _0.__Instance;
+            __Internal.cctor(__Instance, __arg0);
+            SetupVTables(GetType().FullName == "NativeLibrary.IExampleClass");
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+        }
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (__Instance == IntPtr.Zero)
+                return;
+            NativeToManagedMap.TryRemove(__Instance, out _);
+            ((global::NativeLibrary.IExampleClass.__Internal*) __Instance)->vfptr_IExampleClass = __VTables.Tables[0];
+            if (__ownsNativeInstance)
+                Marshal.FreeHGlobal(__Instance);
+            __Instance = IntPtr.Zero;
+        }
+
+        public abstract void Increment();
+
+        public abstract void Decrement();
+
+        public abstract int Count
+        {
+            get;
+        }
+
+        #region Virtual table interop
+
+        // virtual ~IExampleClass() = default
+        private static global::NativeLibrary.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+        private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+        {
+            var __target = global::NativeLibrary.IExampleClass.__GetInstance(__instance);
+            __target.Dispose(true);
+        }
+
+        // void Increment() = 0
+        private static global::NativeLibrary.Delegates.Action___IntPtr _IncrementDelegateInstance;
+
+        private static void _IncrementDelegateHook(__IntPtr __instance)
+        {
+            var __target = global::NativeLibrary.IExampleClass.__GetInstance(__instance);
+            __target.Increment();
+        }
+
+        // void Decrement() = 0
+        private static global::NativeLibrary.Delegates.Action___IntPtr _DecrementDelegateInstance;
+
+        private static void _DecrementDelegateHook(__IntPtr __instance)
+        {
+            var __target = global::NativeLibrary.IExampleClass.__GetInstance(__instance);
+            __target.Decrement();
+        }
+
+        // int GetCount() const = 0
+        private static global::NativeLibrary.Delegates.Func_int___IntPtr _GetCountDelegateInstance;
+
+        private static int _GetCountDelegateHook(__IntPtr __instance)
+        {
+            var __target = global::NativeLibrary.IExampleClass.__GetInstance(__instance);
+            return __target.Count;
+        }
+
+        internal static class VTableLoader
+        {
+            private static volatile bool initialized;
+            private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+            private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+            private static readonly IntPtr[] Thunks = new IntPtr[4];
+            private static CppSharp.Runtime.VTables VTables;
+            private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+
+            static VTableLoader()
+            {
+                _dtorDelegateInstance += _dtorDelegateHook;
+                _IncrementDelegateInstance += _IncrementDelegateHook;
+                _DecrementDelegateInstance += _DecrementDelegateHook;
+                _GetCountDelegateInstance += _GetCountDelegateHook;
+                Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                Thunks[1] = Marshal.GetFunctionPointerForDelegate(_IncrementDelegateInstance);
+                Thunks[2] = Marshal.GetFunctionPointerForDelegate(_DecrementDelegateInstance);
+                Thunks[3] = Marshal.GetFunctionPointerForDelegate(_GetCountDelegateInstance);
+            }
+
+            public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+            {
+                if (!initialized)
+                {
+                    lock (ManagedVTables)
+                    {
+                        if (!initialized)
+                        {
+                            initialized = true;
+                            VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                            VTables.Methods = new Delegate[1][];
+                            ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 4);
+                            ManagedVTablesDtorOnly[0][0] = Thunks[0];
+                            ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 4);
+                            ManagedVTables[0][0] = Thunks[0];
+                            ManagedVTables[0][1] = Thunks[1];
+                            ManagedVTables[0][2] = Thunks[2];
+                            ManagedVTables[0][3] = Thunks[3];
+                            VTables.Methods[0] = new Delegate[4];
+                        }
+                    }
+                }
+
+                if (destructorOnly)
+                {
+                    *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                }
+                else
+                {
+                    *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                }
+                return VTables;
+            }
+        }
+
+        protected CppSharp.Runtime.VTables __vtables;
+        internal virtual CppSharp.Runtime.VTables __VTables
+        { 
+            get {
+                if (__vtables.IsEmpty)
+                    __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                return __vtables;
+            }
+
+            set {        
+                __vtables = value;
+            }
+        }
+
+        internal virtual void SetupVTables(bool destructorOnly = false)
+        {
+            if (__VTables.IsTransient)
+                __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+        }
+        #endregion
+    }
+
+    public unsafe partial class IExampleClassInternal : global::NativeLibrary.IExampleClass, IDisposable
+    {
+        private static void* __CopyValue(__Internal native)
+        {
+            var ret = Marshal.AllocHGlobal(sizeof(__Internal));
+            *(__Internal*) ret = native;
+            return ret.ToPointer();
+        }
+
+        internal IExampleClassInternal(__Internal native, bool skipVTables = false)
+            : this(__CopyValue(native), skipVTables)
+        {
+            __ownsNativeInstance = true;
+            NativeToManagedMap[__Instance] = this;
+        }
+
+        internal IExampleClassInternal(void* native, bool skipVTables = false)
+            : base((void*) native)
+        {
+        }
+
+        public override void Increment()
+        {
+            var ___IncrementDelegate = __VTables.GetMethodDelegate<global::NativeLibrary.Delegates.Action___IntPtr>(0, 1);
+            ___IncrementDelegate(__Instance);
+        }
+
+        public override void Decrement()
+        {
+            var ___DecrementDelegate = __VTables.GetMethodDelegate<global::NativeLibrary.Delegates.Action___IntPtr>(0, 2);
+            ___DecrementDelegate(__Instance);
+        }
+
+        public override int Count
+        {
+            get
+            {
+                var ___GetCountDelegate = __VTables.GetMethodDelegate<global::NativeLibrary.Delegates.Func_int___IntPtr>(0, 3);
+                var __ret = ___GetCountDelegate(__Instance);
+                return __ret;
+            }
+        }
+    }
+
+    public unsafe partial class ExampleClass : global::NativeLibrary.IExampleClass, IDisposable
+    {
+        [StructLayout(LayoutKind.Sequential, Size = 16)]
+        public new partial struct __Internal
+        {
+            internal __IntPtr vfptr_IExampleClass;
             internal int _count;
 
             [SuppressUnmanagedCodeSecurity, DllImport("ExistingInterop", EntryPoint = "??0ExampleClass@@QEAA@XZ", CallingConvention = __CallingConvention.Cdecl)]
             internal static extern __IntPtr ctor(__IntPtr __instance);
 
-            [SuppressUnmanagedCodeSecurity, DllImport("ExistingInterop.dll", EntryPoint = "??0ExampleClass@@QEAA@AEBV0@@Z", CallingConvention = __CallingConvention.Cdecl)]
+            [SuppressUnmanagedCodeSecurity, DllImport("ExistingInterop", EntryPoint = "??0ExampleClass@@QEAA@AEBV0@@Z", CallingConvention = __CallingConvention.Cdecl)]
             internal static extern __IntPtr cctor(__IntPtr __instance, __IntPtr _0);
-
-            [SuppressUnmanagedCodeSecurity, DllImport("ExistingInterop", EntryPoint = "?Increment@ExampleClass@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
-            internal static extern void Increment(__IntPtr __instance);
-
-            [SuppressUnmanagedCodeSecurity, DllImport("ExistingInterop", EntryPoint = "?Decrement@ExampleClass@@QEAAXXZ", CallingConvention = __CallingConvention.Cdecl)]
-            internal static extern void Decrement(__IntPtr __instance);
-
-            [SuppressUnmanagedCodeSecurity, DllImport("ExistingInterop", EntryPoint = "?GetCount@ExampleClass@@QEBAHXZ", CallingConvention = __CallingConvention.Cdecl)]
-            internal static extern int GetCount(__IntPtr __instance);
         }
 
-        public __IntPtr __Instance { get; protected set; }
-
-        internal static readonly global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::NativeLibrary.ExampleClass> NativeToManagedMap = new global::System.Collections.Concurrent.ConcurrentDictionary<IntPtr, global::NativeLibrary.ExampleClass>();
-
-        protected bool __ownsNativeInstance;
-
-        internal static ExampleClass __CreateInstance(__IntPtr native, bool skipVTables = false)
+        internal static new ExampleClass __CreateInstance(__IntPtr native, bool skipVTables = false)
         {
             return new ExampleClass(native.ToPointer(), skipVTables);
         }
 
-        internal static ExampleClass __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
+        internal static new ExampleClass __GetOrCreateInstance(__IntPtr native, bool saveInstance = false, bool skipVTables = false)
         {
             if (native == __IntPtr.Zero)
                 return null;
@@ -58,6 +312,16 @@ namespace NativeLibrary
             return result;
         }
 
+        internal static new ExampleClass __GetInstance(__IntPtr native)
+        {
+            if (!NativeToManagedMap.TryGetValue(native, out var managed))
+                throw new System.Exception("No managed instance was found");
+            var result = (ExampleClass)managed;
+            if (result.__ownsNativeInstance)
+                result.SetupVTables();
+            return result;
+        }
+
         internal static ExampleClass __CreateInstance(__Internal native, bool skipVTables = false)
         {
             return new ExampleClass(native, skipVTables);
@@ -66,7 +330,7 @@ namespace NativeLibrary
         private static void* __CopyValue(__Internal native)
         {
             var ret = Marshal.AllocHGlobal(sizeof(__Internal));
-            *(__Internal*) ret = native;
+            global::NativeLibrary.ExampleClass.__Internal.cctor(ret, new __IntPtr(&native));
             return ret.ToPointer();
         }
 
@@ -78,64 +342,173 @@ namespace NativeLibrary
         }
 
         protected ExampleClass(void* native, bool skipVTables = false)
+            : base((void*) native)
         {
             if (native == null)
                 return;
-            __Instance = new __IntPtr(native);
+            if (!skipVTables)
+                SetupVTables(true);
         }
 
         public ExampleClass()
+            : this((void*) null)
         {
             __Instance = Marshal.AllocHGlobal(sizeof(global::NativeLibrary.ExampleClass.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
             __Internal.ctor(__Instance);
+            SetupVTables(GetType().FullName == "NativeLibrary.ExampleClass");
         }
 
         public ExampleClass(global::NativeLibrary.ExampleClass _0)
+            : this((void*) null)
         {
             __Instance = Marshal.AllocHGlobal(sizeof(global::NativeLibrary.ExampleClass.__Internal));
             __ownsNativeInstance = true;
             NativeToManagedMap[__Instance] = this;
-            *((global::NativeLibrary.ExampleClass.__Internal*) __Instance) = *((global::NativeLibrary.ExampleClass.__Internal*) _0.__Instance);
+            if (ReferenceEquals(_0, null))
+                throw new global::System.ArgumentNullException("_0", "Cannot be null because it is a C++ reference (&).");
+            var __arg0 = _0.__Instance;
+            __Internal.cctor(__Instance, __arg0);
+            SetupVTables(GetType().FullName == "NativeLibrary.ExampleClass");
         }
 
-        public void Dispose()
+        public override void Increment()
         {
-            Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+            var ___IncrementDelegate = __VTables.GetMethodDelegate<global::NativeLibrary.Delegates.Action___IntPtr>(0, 1);
+            ___IncrementDelegate(__Instance);
         }
 
-        partial void DisposePartial(bool disposing);
-
-        internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+        public override void Decrement()
         {
-            if (__Instance == IntPtr.Zero)
-                return;
-            NativeToManagedMap.TryRemove(__Instance, out _);
-            DisposePartial(disposing);
-            if (__ownsNativeInstance)
-                Marshal.FreeHGlobal(__Instance);
-            __Instance = IntPtr.Zero;
+            var ___DecrementDelegate = __VTables.GetMethodDelegate<global::NativeLibrary.Delegates.Action___IntPtr>(0, 2);
+            ___DecrementDelegate(__Instance);
         }
 
-        public void Increment()
-        {
-            __Internal.Increment(__Instance);
-        }
-
-        public void Decrement()
-        {
-            __Internal.Decrement(__Instance);
-        }
-
-        public int Count
+        public override int Count
         {
             get
             {
-                var __ret = __Internal.GetCount(__Instance);
+                var ___GetCountDelegate = __VTables.GetMethodDelegate<global::NativeLibrary.Delegates.Func_int___IntPtr>(0, 3);
+                var __ret = ___GetCountDelegate(__Instance);
                 return __ret;
             }
         }
+
+        #region Virtual table interop
+
+        // ExampleClass
+        private static global::NativeLibrary.Delegates.Action___IntPtr_int _dtorDelegateInstance;
+
+        private static void _dtorDelegateHook(__IntPtr __instance, int delete)
+        {
+            var __target = global::NativeLibrary.ExampleClass.__GetInstance(__instance);
+            __target.Dispose(true);
+        }
+
+        // void Increment() override
+        private static global::NativeLibrary.Delegates.Action___IntPtr _IncrementDelegateInstance;
+
+        private static void _IncrementDelegateHook(__IntPtr __instance)
+        {
+            var __target = global::NativeLibrary.ExampleClass.__GetInstance(__instance);
+            __target.Increment();
+        }
+
+        // void Decrement() override
+        private static global::NativeLibrary.Delegates.Action___IntPtr _DecrementDelegateInstance;
+
+        private static void _DecrementDelegateHook(__IntPtr __instance)
+        {
+            var __target = global::NativeLibrary.ExampleClass.__GetInstance(__instance);
+            __target.Decrement();
+        }
+
+        // int GetCount() const override
+        private static global::NativeLibrary.Delegates.Func_int___IntPtr _GetCountDelegateInstance;
+
+        private static int _GetCountDelegateHook(__IntPtr __instance)
+        {
+            var __target = global::NativeLibrary.ExampleClass.__GetInstance(__instance);
+            return __target.Count;
+        }
+
+        internal static new class VTableLoader
+        {
+            private static volatile bool initialized;
+            private static readonly IntPtr*[] ManagedVTables = new IntPtr*[1];
+            private static readonly IntPtr*[] ManagedVTablesDtorOnly = new IntPtr*[1];
+            private static readonly IntPtr[] Thunks = new IntPtr[4];
+            private static CppSharp.Runtime.VTables VTables;
+            private static readonly global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>
+                SafeHandles = new global::System.Collections.Generic.List<CppSharp.Runtime.SafeUnmanagedMemoryHandle>();
+
+            static VTableLoader()
+            {
+                _dtorDelegateInstance += _dtorDelegateHook;
+                _IncrementDelegateInstance += _IncrementDelegateHook;
+                _DecrementDelegateInstance += _DecrementDelegateHook;
+                _GetCountDelegateInstance += _GetCountDelegateHook;
+                Thunks[0] = Marshal.GetFunctionPointerForDelegate(_dtorDelegateInstance);
+                Thunks[1] = Marshal.GetFunctionPointerForDelegate(_IncrementDelegateInstance);
+                Thunks[2] = Marshal.GetFunctionPointerForDelegate(_DecrementDelegateInstance);
+                Thunks[3] = Marshal.GetFunctionPointerForDelegate(_GetCountDelegateInstance);
+            }
+
+            public static CppSharp.Runtime.VTables SetupVTables(IntPtr instance, bool destructorOnly = false)
+            {
+                if (!initialized)
+                {
+                    lock (ManagedVTables)
+                    {
+                        if (!initialized)
+                        {
+                            initialized = true;
+                            VTables.Tables = new IntPtr[] { *(IntPtr*)(instance + 0) };
+                            VTables.Methods = new Delegate[1][];
+                            ManagedVTablesDtorOnly[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 4);
+                            ManagedVTablesDtorOnly[0][0] = Thunks[0];
+                            ManagedVTables[0] = CppSharp.Runtime.VTables.CloneTable(SafeHandles, instance, 0, 4);
+                            ManagedVTables[0][0] = Thunks[0];
+                            ManagedVTables[0][1] = Thunks[1];
+                            ManagedVTables[0][2] = Thunks[2];
+                            ManagedVTables[0][3] = Thunks[3];
+                            VTables.Methods[0] = new Delegate[4];
+                        }
+                    }
+                }
+
+                if (destructorOnly)
+                {
+                    *(IntPtr**)(instance + 0) = ManagedVTablesDtorOnly[0];
+                }
+                else
+                {
+                    *(IntPtr**)(instance + 0) = ManagedVTables[0];
+                }
+                return VTables;
+            }
+        }
+
+        internal override CppSharp.Runtime.VTables __VTables
+        { 
+            get {
+                if (__vtables.IsEmpty)
+                    __vtables.Tables = new IntPtr[] { *(IntPtr*)(__Instance + 0) };
+                return __vtables;
+            }
+
+            set {        
+                __vtables = value;
+            }
+        }
+
+        internal override void SetupVTables(bool destructorOnly = false)
+        {
+            if (__VTables.IsTransient)
+                __VTables = VTableLoader.SetupVTables(__Instance, destructorOnly);
+        }
+        #endregion
     }
 
     public unsafe partial class NewMaster : IDisposable
@@ -219,17 +592,14 @@ namespace NativeLibrary
 
         public void Dispose()
         {
-            Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+            Dispose(disposing: true);
         }
 
-        partial void DisposePartial(bool disposing);
-
-        internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+        public virtual void Dispose(bool disposing)
         {
             if (__Instance == IntPtr.Zero)
                 return;
             NativeToManagedMap.TryRemove(__Instance, out _);
-            DisposePartial(disposing);
             if (__ownsNativeInstance)
                 Marshal.FreeHGlobal(__Instance);
             __Instance = IntPtr.Zero;
@@ -333,17 +703,14 @@ namespace NativeLibrary
 
         public void Dispose()
         {
-            Dispose(disposing: true, callNativeDtor : __ownsNativeInstance );
+            Dispose(disposing: true);
         }
 
-        partial void DisposePartial(bool disposing);
-
-        internal protected virtual void Dispose(bool disposing, bool callNativeDtor )
+        public virtual void Dispose(bool disposing)
         {
             if (__Instance == IntPtr.Zero)
                 return;
             NativeToManagedMap.TryRemove(__Instance, out _);
-            DisposePartial(disposing);
             if (__ownsNativeInstance)
                 Marshal.FreeHGlobal(__Instance);
             __Instance = IntPtr.Zero;
@@ -390,5 +757,17 @@ namespace NativeLibrary
             var __ret = __Internal.FooAdd(__arg0);
             return __ret;
         }
+    }
+
+    namespace Delegates
+    {
+        [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
+        internal unsafe delegate void Action___IntPtr_int(__IntPtr __instance, int arg1);
+
+        [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
+        internal unsafe delegate void Action___IntPtr(__IntPtr __instance);
+
+        [SuppressUnmanagedCodeSecurity, UnmanagedFunctionPointer(__CallingConvention.Cdecl)]
+        internal unsafe delegate int Func_int___IntPtr(__IntPtr __instance);
     }
 }
