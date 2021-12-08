@@ -21,12 +21,18 @@
     <ClInclude Include="ExampleGate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Sample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InteropManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ExampleGate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sample.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

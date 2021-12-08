@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using InteropDependencies;
+using NativeLibrary;
 
 namespace WPFApplication
 {
@@ -13,13 +14,15 @@ namespace WPFApplication
    {
       public event PropertyChangedEventHandler PropertyChanged;
 
-      private ICommand _decrementClicked;
-      private ICommand _incrementClicked;
-      private IExampleGate _exampleGate;
+      private readonly ICommand _decrementClicked;
+      private readonly ICommand _incrementClicked;
+      private readonly IExampleGate _exampleGate;
+      private readonly ExampleClass _exampleClass;
 
-      public VM( IExampleGate exampleGate )
+      public VM( IExampleGate exampleGate, ExampleClass exampleClass )
       {
          _exampleGate = exampleGate ?? throw new ArgumentNullException( nameof( exampleGate ) );
+         _exampleClass = exampleClass ?? throw new ArgumentNullException( nameof( exampleClass ) );
 
          _decrementClicked = new RelayCommand( () =>
          {
@@ -28,7 +31,8 @@ namespace WPFApplication
          } );
          _incrementClicked = new RelayCommand( () =>
          {
-            _exampleGate.IncrementCount();
+            //_exampleGate.IncrementCount();
+            _exampleClass.Increment();
             PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( nameof( CountStr ) ) );
          } );
       }

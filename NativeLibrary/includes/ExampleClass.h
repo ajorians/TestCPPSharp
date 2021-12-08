@@ -1,8 +1,12 @@
 #pragma once
 
-class ExampleClass
+#include "ExportAPI.h"
+
+class EXPORT_API ExampleClass
 {
 public:
+   ExampleClass();
+
    void Increment();
    void Decrement();
    int GetCount() const;

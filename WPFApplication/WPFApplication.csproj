@@ -24,6 +24,7 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>$(SolutionDir)x64\$(Configuration)</OutputPath>
@@ -34,6 +35,7 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -56,6 +58,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\GenerateBindings\bin\Debug\net5.0\NativeLibrary.cs">
+      <Link>NativeLibrary.cs</Link>
+    </Compile>
+    <Compile Include="..\GenerateBindings\bin\Debug\net5.0\Std.cs">
+      <Link>Std.cs</Link>
+    </Compile>
     <Compile Include="RelayCommand.cs" />
     <Compile Include="VM.cs" />
     <Page Include="MainWindow.xaml">
