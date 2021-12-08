@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFApplication", "WPFApplic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenerateBindings", "GenerateBindings\GenerateBindings.csproj", "{CBEDEF6F-1820-494B-A04F-EFE21A470595}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFCoreApplication", "WPFCoreApplication\WPFCoreApplication.csproj", "{A9635CD2-0203-4728-8A03-002194E9BDFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -26,6 +28,9 @@ Global
 		{CBEDEF6F-1820-494B-A04F-EFE21A470595}.Debug|x64.Build.0 = Debug|Any CPU
 		{CBEDEF6F-1820-494B-A04F-EFE21A470595}.Release|x64.ActiveCfg = Release|Any CPU
 		{CBEDEF6F-1820-494B-A04F-EFE21A470595}.Release|x64.Build.0 = Release|Any CPU
+		{A9635CD2-0203-4728-8A03-002194E9BDFE}.Debug|x64.ActiveCfg = Debug|x64
+		{A9635CD2-0203-4728-8A03-002194E9BDFE}.Debug|x64.Build.0 = Debug|x64
+		{A9635CD2-0203-4728-8A03-002194E9BDFE}.Release|x64.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
