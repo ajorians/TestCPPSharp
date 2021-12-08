@@ -61,9 +61,6 @@
     <Compile Include="..\GenerateBindings\bin\Debug\net5.0\NativeLibrary.cs">
       <Link>NativeLibrary.cs</Link>
     </Compile>
-    <Compile Include="..\GenerateBindings\bin\Debug\net5.0\Std.cs">
-      <Link>Std.cs</Link>
-    </Compile>
     <Compile Include="RelayCommand.cs" />
     <Compile Include="VM.cs" />
     <Page Include="MainWindow.xaml">
@@ -104,16 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ExistingInterop\ExistingInterop.vcxproj">
-      <Project>{8f8a5a9a-ccba-4ca6-8cbf-f89f830ceb83}</Project>
-      <Name>ExistingInterop</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InteropDependencies\InteropDependencies.csproj">
-      <Project>{13817fec-2fbe-4be1-9620-f97e8d8635ba}</Project>
-      <Name>InteropDependencies</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
