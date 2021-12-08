@@ -1,5 +1,10 @@
 #include "ExampleClass.h"
 
+ExampleClass::ExampleClass()
+{
+
+}
+
 void ExampleClass::Increment()
 {
    _count++;

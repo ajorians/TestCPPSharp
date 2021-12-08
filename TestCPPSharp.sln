@@ -7,9 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NativeLibrary", "NativeLibr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFApplication", "WPFApplication\WPFApplication.csproj", "{33E9E719-432E-4048-9532-9F1AA1D9A251}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteropDependencies", "InteropDependencies\InteropDependencies.csproj", "{13817FEC-2FBE-4BE1-9620-F97E8D8635BA}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExistingInterop", "ExistingInterop\ExistingInterop.vcxproj", "{8F8A5A9A-CCBA-4CA6-8CBF-F89F830CEB83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenerateBindings", "GenerateBindings\GenerateBindings.csproj", "{CBEDEF6F-1820-494B-A04F-EFE21A470595}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,14 +22,10 @@ Global
 		{33E9E719-432E-4048-9532-9F1AA1D9A251}.Debug|x64.ActiveCfg = Debug|x64
 		{33E9E719-432E-4048-9532-9F1AA1D9A251}.Debug|x64.Build.0 = Debug|x64
 		{33E9E719-432E-4048-9532-9F1AA1D9A251}.Release|x64.ActiveCfg = Release|x64
-		{13817FEC-2FBE-4BE1-9620-F97E8D8635BA}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{13817FEC-2FBE-4BE1-9620-F97E8D8635BA}.Debug|x64.Build.0 = Debug|Any CPU
-		{13817FEC-2FBE-4BE1-9620-F97E8D8635BA}.Release|x64.ActiveCfg = Release|Any CPU
-		{13817FEC-2FBE-4BE1-9620-F97E8D8635BA}.Release|x64.Build.0 = Release|Any CPU
-		{8F8A5A9A-CCBA-4CA6-8CBF-F89F830CEB83}.Debug|x64.ActiveCfg = Debug|x64
-		{8F8A5A9A-CCBA-4CA6-8CBF-F89F830CEB83}.Debug|x64.Build.0 = Debug|x64
-		{8F8A5A9A-CCBA-4CA6-8CBF-F89F830CEB83}.Release|x64.ActiveCfg = Release|x64
-		{8F8A5A9A-CCBA-4CA6-8CBF-F89F830CEB83}.Release|x64.Build.0 = Release|x64
+		{CBEDEF6F-1820-494B-A04F-EFE21A470595}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CBEDEF6F-1820-494B-A04F-EFE21A470595}.Debug|x64.Build.0 = Debug|Any CPU
+		{CBEDEF6F-1820-494B-A04F-EFE21A470595}.Release|x64.ActiveCfg = Release|Any CPU
+		{CBEDEF6F-1820-494B-A04F-EFE21A470595}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

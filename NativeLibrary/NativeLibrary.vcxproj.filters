@@ -18,15 +18,12 @@
     <ClInclude Include="includes\ExampleClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="includes\Master.h">
+    <ClInclude Include="includes\ExportAPI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExampleClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Master.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

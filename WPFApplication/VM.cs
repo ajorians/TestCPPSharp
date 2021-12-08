@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using InteropDependencies;
+using NativeLibrary;
 
 namespace WPFApplication
 {
@@ -13,22 +10,22 @@ namespace WPFApplication
    {
       public event PropertyChangedEventHandler PropertyChanged;
 
-      private ICommand _decrementClicked;
-      private ICommand _incrementClicked;
-      private IExampleGate _exampleGate;
+      private readonly ICommand _decrementClicked;
+      private readonly ICommand _incrementClicked;
+      private readonly ExampleClass _exampleClass;
 
-      public VM( IExampleGate exampleGate )
+      public VM( ExampleClass exampleClass )
       {
-         _exampleGate = exampleGate ?? throw new ArgumentNullException( nameof( exampleGate ) );
+         _exampleClass = exampleClass ?? throw new ArgumentNullException( nameof( exampleClass ) );
 
          _decrementClicked = new RelayCommand( () =>
          {
-            _exampleGate.DecrementCount();
+            _exampleClass.Decrement();
             PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( nameof( CountStr ) ) );
          } );
          _incrementClicked = new RelayCommand( () =>
          {
-            _exampleGate.IncrementCount();
+            _exampleClass.Increment();
             PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( nameof( CountStr ) ) );
          } );
       }
@@ -36,7 +33,7 @@ namespace WPFApplication
       public ICommand IncrementClicked => _incrementClicked;
       public int Count
       {
-         get => _exampleGate.GetCount();
+         get => _exampleClass.Count;
       }
 
       public string CountStr => Count.ToString();
